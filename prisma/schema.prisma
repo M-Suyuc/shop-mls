@@ -27,9 +27,6 @@ enum Gender {
 model Category {
   id       String    @id @default(uuid())
   name     String    @unique
-  // slug      String    @unique
-  // createdAt DateTime  @default(now())
-  // updatedAt DateTime  @updatedAt
   products Product[]
 }
 
@@ -39,7 +36,7 @@ model Product {
   description String
   inStock     Int
   price       Float    @default(0)
-  size        Size[]   @default([])
+  sizes       Size[]   @default([])
   slug        String   @unique
   tags        String[] @default([])
   gender      Gender
