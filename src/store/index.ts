@@ -1,2 +1,1 @@
-export * from './ui/ui-store'
-export * from './products/fetchProducts'
+export * from "./ui/ui-store";
