@@ -1,10 +1,13 @@
 import { SeedProduct } from "../interfaces/index";
 
 interface SeedData {
+  categories: string[];
   products: SeedProduct[];
 }
 
 export const initialData: SeedData = {
+  categories: ["Shirts", "Hoodies", "Hats", "Pants"],
+
   products: [
     {
       description:
