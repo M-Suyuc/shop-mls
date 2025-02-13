@@ -1,8 +1,8 @@
-import { SeedProduct } from "../interfaces/index";
+import { ProductDev } from "../interfaces/index"
 
 interface SeedData {
-  categories: string[];
-  products: SeedProduct[];
+  categories: string[]
+  products: ProductDev[]
 }
 
 export const initialData: SeedData = {
@@ -688,4 +688,4 @@ export const initialData: SeedData = {
       gender: "kid",
     },
   ],
-};
+}
