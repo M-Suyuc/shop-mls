@@ -63,14 +63,14 @@ export const ProductSlideshow = ({ images, title, className }: Props) => {
         {images.map((image) => (
           <SwiperSlide
             key={image}
-            className="cursor-pointer my-2 overflow-hidden rounded-xl"
+            className="cursor-pointer my-2 overflow-hidden rounded-xl h-full w-full"
           >
             <Image
               width={300}
               height={300}
               src={`/products/${image}`}
               alt={`imagen de ${title}`}
-              className="w-fit h-full md:object-cover mx-auto"
+              className="w-full h-full object-cover"
             />
           </SwiperSlide>
         ))}
