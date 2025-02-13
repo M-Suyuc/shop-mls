@@ -1,27 +1,24 @@
-import { notFound } from "next/navigation";
-import { titleFont } from "@/config/fonts";
+export const revalidate = 604800 // 7 dias
+
+import { notFound } from "next/navigation"
+import { titleFont } from "@/config/fonts"
 import {
   ProductMobileSlideshow,
   ProductSlideshow,
   QuantitySelector,
   SizeSelector,
-} from "@/components";
-// import { useProductsStore } from "@/store";
-import { initialData } from "@/seed/seed";
+} from "@/components"
+import { getProductBySlug } from "@/actions/products/get-product-by-slug"
 
-interface Props {
-  params: { slug: string };
-}
+type Params = Promise<{ slug: string }>
 
-export default async function ProductSlug({ params }: Props) {
-  const { slug } = await params;
-  // mens_chill_crew_neck_sweatshirt
-  // const products = useProductsStore((state) => state.products);
-  const products = initialData.products;
+export default async function ProductSlug(props: { params: Params }) {
+  const params = await props.params
+  const slug = params.slug
 
-  const product = products.find((product) => product.slug === slug);
+  const product = await getProductBySlug(slug)
 
-  if (!product) notFound();
+  if (!product) notFound()
 
   return (
     <>
@@ -46,6 +43,12 @@ export default async function ProductSlug({ params }: Props) {
         {/* xs:px-6 mx-auto max-w-screen-lg px-4 sm:px-8 lg:px-0 */}
         {/* Details product */}
         <section className="col-span-3 pt-4 px-4 sm:px-8 h-[150vh]">
+          <h1
+            className={`${titleFont.className} text-2xl font-semibold antialiased`}
+          >
+            Stock: {product.inStock}
+          </h1>
+
           <h1
             className={`${titleFont.className} text-2xl font-semibold antialiased`}
           >
@@ -79,5 +82,5 @@ export default async function ProductSlug({ params }: Props) {
       </div>
       {/* <div className="min-h-screen bg-orange-600 w-full"></div> */}
     </>
-  );
+  )
 }
