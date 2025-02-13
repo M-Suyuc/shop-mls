@@ -1,11 +1,9 @@
-export const revalidate = 0;
-
-import { Title } from "@/components";
+import { Title } from "@/components"
 // https://tailwindcomponents.com/component/hoverable-table
 // import { getOrdersByUser } from "@/actions";
 
-import Link from "next/link";
-import { IoCardOutline } from "react-icons/io5";
+import Link from "next/link"
+import { IoCardOutline } from "react-icons/io5"
 
 export default async function OrdersPage() {
   // const { ok, orders = [] } = await getOrdersByUser();
@@ -115,5 +113,5 @@ export default async function OrdersPage() {
         </table>
       </div>
     </>
-  );
+  )
 }

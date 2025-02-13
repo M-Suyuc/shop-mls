@@ -1,8 +1,8 @@
-import Image from "next/image";
-import clsx from "clsx";
-import { IoCardOutline } from "react-icons/io5";
-import { Title } from "@/components";
-import { initialData } from "@/seed/seed";
+import Image from "next/image"
+import clsx from "clsx"
+import { IoCardOutline } from "react-icons/io5"
+import { Title } from "@/components"
+import { initialData } from "@/seed/seed"
 
 const productsInCart = [
   initialData.products[0],
@@ -10,14 +10,17 @@ const productsInCart = [
   initialData.products[2],
   initialData.products[3],
   initialData.products[4],
-];
+]
+
 interface Props {
-  params: {
-    id: string;
-  };
+  params: Promise<{
+    id: string
+  }>
 }
 
-export default function Home({ params: { id } }: Props) {
+export default async function Home({ params }: Props) {
+  const { id } = await params
+
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:px-0">
       <div className="flex flex-col w-[1000px] ">
@@ -106,5 +109,5 @@ export default function Home({ params: { id } }: Props) {
         </div>
       </div>
     </div>
-  );
+  )
 }
