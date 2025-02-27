@@ -26,7 +26,7 @@ o dircetamente hacer un
 npx prisma db push
 ```
 
-6. Ir a la carpeta de interfaces como funciona las interfaces
+6. Ir a la carpeta de interfaces para ver como funciona las interfaces
 7. Ejecutar Seed
 
 ```sh
@@ -38,3 +38,13 @@ npm run seed
 ```sh
 npm run dev
 ```
+
+## Comandos de Prisma ORM usando PostgreSQL
+
+1. npm install prisma --save-dev
+2. npx prisma init --datasource-provider PostgreSQL
+3. npx prisma migrate dev --name ProductCAtegory(Nombre de la migracion)
+
+#### Comandos utiles a futuro
+
+1. npx prisma db pull (All tener una DB y quieras pasarte a prisma ORM o crear modelos en base a lo que tengas en la DB)
