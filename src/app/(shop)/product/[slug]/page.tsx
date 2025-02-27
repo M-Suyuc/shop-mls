@@ -2,19 +2,41 @@ export const revalidate = 604800 // 7 dias
 
 import { notFound } from "next/navigation"
 import { titleFont } from "@/config/fonts"
-import {
-  ProductMobileSlideshow,
-  ProductSlideshow,
-  QuantitySelector,
-  SizeSelector,
-} from "@/components"
+import { ProductMobileSlideshow, ProductSlideshow } from "@/components"
 import { getProductBySlug } from "@/actions/products/get-product-by-slug"
+import { StockLabel } from "@/components/product/stock-label/StockLabel"
+import { Metadata, ResolvingMetadata } from "next"
+import { AddToCart } from "./ui/AddToCart"
 
-type Params = Promise<{ slug: string }>
+type Props = {
+  params: Promise<{ slug: string }>
+}
 
-export default async function ProductSlug(props: { params: Params }) {
-  const params = await props.params
-  const slug = params.slug
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const slug = (await params).slug
+
+  const product = await getProductBySlug(slug)
+
+  const previousImages = (await parent).openGraph?.images || []
+
+  return {
+    title: product?.title ?? "Producto no encontrado",
+    description: product?.description ?? "",
+    openGraph: {
+      title: product?.title ?? "Producto no encontrado",
+      description: product?.description ?? "",
+      // images: [],
+      images: [`/products/${product?.images[1]}`, ...previousImages],
+    },
+  }
+}
+
+export default async function ProductSlug({ params }: Props) {
+  const slug = (await params).slug
 
   const product = await getProductBySlug(slug)
 
@@ -40,14 +62,9 @@ export default async function ProductSlug(props: { params: Params }) {
           />
         </section>
 
-        {/* xs:px-6 mx-auto max-w-screen-lg px-4 sm:px-8 lg:px-0 */}
         {/* Details product */}
         <section className="col-span-3 pt-4 px-4 sm:px-8 h-[150vh]">
-          <h1
-            className={`${titleFont.className} text-2xl font-semibold antialiased`}
-          >
-            Stock: {product.inStock}
-          </h1>
+          <StockLabel slug={product.slug} />
 
           <h1
             className={`${titleFont.className} text-2xl font-semibold antialiased`}
@@ -55,32 +72,14 @@ export default async function ProductSlug(props: { params: Params }) {
             {product.title}
           </h1>
 
-          <p className="text-lg mb-4">{product.price}</p>
-          {product?.sizes.length >= 1 && (
-            <SizeSelector
-              availableSize={product?.sizes}
-              selectedSize={product?.sizes[0]}
-            />
-          )}
+          <p className="text-lg mb-4">$ {product.price.toFixed(2)}</p>
 
-          <QuantitySelector quantity={1} />
+          <AddToCart product={product} />
 
-          <button className="btn-add w-fit md:w-full my-4 ">
-            Añadir a la cesta
-          </button>
-
-          <h3 className="font-bold text-sm">Descripción</h3>
-          <p className="font-light text-sm md:text-base">
-            INTRODUCING THE TESLA RAVEN COLLECTION. THE MEN S RAVEN LIGHTWEIGHT
-            HOODIE HAS A PREMIUM, RELAXED SILHOUETTE MADE FROM A SUSTAINABLE
-            BAMBOO COTTON BLEND. THE HOODIE FEATURES SUBTLE THERMOPLASTIC
-            POLYURETHANE TESLA LOGOS ACROSS THE CHEST AND ON THE SLEEVE WITH A
-            FRENCH TERRY INTERIOR FOR VERSATILITY IN ANY SEASON. MADE FROM 70%
-            BAMBOO AND 30% COTTON.
-          </p>
+          <h3 className="font-bold text-lg">Descripción</h3>
+          <p className="font-light">{product.description}</p>
         </section>
       </div>
-      {/* <div className="min-h-screen bg-orange-600 w-full"></div> */}
     </>
   )
 }
