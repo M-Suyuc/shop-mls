@@ -7,6 +7,7 @@ import { getProductBySlug } from "@/actions/products/get-product-by-slug"
 import { StockLabel } from "@/components/product/stock-label/StockLabel"
 import { Metadata, ResolvingMetadata } from "next"
 import { AddToCart } from "./ui/AddToCart"
+import { currencyFormat } from "@/utils/currencyFormat"
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -72,7 +73,7 @@ export default async function ProductSlug({ params }: Props) {
             {product.title}
           </h1>
 
-          <p className="text-lg mb-4">$ {product.price.toFixed(2)}</p>
+          <p className="text-lg mb-4">{currencyFormat(product.price)}</p>
 
           <AddToCart product={product} />
 
