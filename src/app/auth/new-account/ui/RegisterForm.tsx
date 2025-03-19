@@ -1,80 +1,80 @@
-"use client"
+"use client";
 
-import clsx from "clsx"
-import Link from "next/link"
-// import { SubmitHandler, useForm } from 'react-hook-form'
+import clsx from "clsx";
+import Link from "next/link";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-// import { login, registerUser } from '@/actions'
+import { useState } from "react";
+import { registerUser } from "@/actions/auth/register";
+import { login } from "@/actions/auth/login";
+import { useRouter } from "next/navigation";
 
-// type FormInputs = {
-//   name: string
-//   email: string
-//   password: string
-// }
+type FormInputs = {
+  name: string;
+  email: string;
+  password: string;
+};
 
 export const RegisterForm = () => {
-  // const [errorMessage, setErrorMessage] = useState('')
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors }
-  // } = useForm<FormInputs>()
+  const [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter();
 
-  // const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-  //   setErrorMessage('')
-  //   const { name, email, password } = data
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormInputs>();
 
-  //   // Server action
-  //   const resp = await registerUser(name, email, password)
+  const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+    setErrorMessage("");
+    const { name, email, password } = data;
 
-  //   if (!resp.ok) {
-  //     setErrorMessage(resp.message)
-  //     return
-  //   }
+    const response = await registerUser(name, email, password);
 
-  //   await login(email.toLowerCase(), password)
-  //   window.location.replace('/')
-  // }
+    if (!response.ok) {
+      setErrorMessage(response.message);
+      return;
+    }
+    await login(email.toLowerCase(), password);
+    router.push("/");
+  };
 
   return (
-    <form className="flex flex-col">
-      {/* {
-        errors.name?.type === 'required' && (
-          <span className="text-red-500">* El nombre es obligatorio</span>
-        )
-      } */}
-
-      <label htmlFor="email">Nombre completo</label>
+    <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
+      <label htmlFor="email">Name</label>
       <input
         className={clsx("px-5 py-2 border bg-gray-200 rounded mb-5", {
-          "border-red-500": false,
+          "border-red-500": errors.name,
         })}
         type="text"
         autoFocus
-        // {...register('name', { required: true })}
+        {...register("name", { required: true })}
       />
 
-      <label htmlFor="email">Correo electrónico</label>
+      <label htmlFor="email">Email</label>
       <input
         className={clsx("px-5 py-2 border bg-gray-200 rounded mb-5", {
-          "border-red-500": false,
+          "border-red-500": errors.email,
         })}
         type="email"
-        // {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
+        {...register("email", {
+          required: true,
+          pattern: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
+        })}
       />
 
-      <label htmlFor="email">Contraseña</label>
+      <label htmlFor="email">Password</label>
       <input
         className={clsx("px-5 py-2 border bg-gray-200 rounded mb-5", {
-          "border-red-500": false,
+          "border-red-500": errors.password,
         })}
         type="password"
-        // {...register('password', { required: true, minLength: 6 })}
+        {...register("password", { required: true, minLength: 6 })}
       />
 
-      <span className="text-red-500">{} </span>
+      <span className="text-red-500">{errorMessage} </span>
 
-      <button className="btn-primary">Crear cuenta</button>
+      <button className="btn-primary">Create account</button>
 
       {/* divisor l ine */}
       <div className="flex items-center my-5">
@@ -84,8 +84,8 @@ export const RegisterForm = () => {
       </div>
 
       <Link href="/auth/login" className="btn-secondary text-center mb-10">
-        Ingresar
+        Sing in
       </Link>
     </form>
-  )
-}
+  );
+};

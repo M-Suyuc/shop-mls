@@ -54,10 +54,10 @@ const ProductsInCart = () => {
               }
             />
             <button
-              className="underline mt-3"
+              className="underline mt-3 cursor-pointer"
               onClick={() => handleDelete(item)}
             >
-              Remover
+              Remove
             </button>
           </div>
         </div>

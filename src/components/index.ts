@@ -13,3 +13,5 @@ export * from './product/slideshow/ProductMobileSlideshow'
 export * from './product/slideshow/ProductSlideshow'
 
 export * from './ui/footer/Footer'
+
+export * from './provider/Provider'
