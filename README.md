@@ -26,6 +26,12 @@ o dircetamente hacer un
 npx prisma db push
 ```
 
+y si haces algun cambio a los modelos de prisma
+
+```sh
+npx prisma migrate dev --name user-address(Nombre de la migracion)
+```
+
 6. Ir a la carpeta de interfaces para ver como funciona las interfaces
 7. Ejecutar Seed
 
