@@ -39,7 +39,9 @@ npx prisma migrate dev --name user-address(Nombre de la migracion)
 npm run seed
 ```
 
-8. Correr el proyecto
+8. limpiar el localStorage del navegador
+
+9. Correr el proyecto
 
 ```sh
 npm run dev
