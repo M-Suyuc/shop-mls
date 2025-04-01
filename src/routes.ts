@@ -33,8 +33,13 @@ export const DEFAULT_LOGIN_REDIRECT_URL = "/checkout/address";
 export const protectedRoute = [
   "/checkout",
   "/checkout/address",
+
   "/users",
+
   "/admin",
+
   "/orders",
+  "/orders*",
+
   "/profile",
 ];
