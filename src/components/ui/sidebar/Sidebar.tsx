@@ -81,8 +81,9 @@ export const Sidebar = ({ session }: Props) => {
             </Link>
 
             <Link
-              href="/"
+              href="/orders"
               className="flex items-center mt-2 p-2 hover:bg-gray-100 rounded transition-all"
+              onClick={closeSideMenu}
             >
               <IoTicketOutline size={30} />
               <span className="ml-3 text-xl">Ordenes</span>
