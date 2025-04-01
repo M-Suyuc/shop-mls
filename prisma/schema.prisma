@@ -119,6 +119,8 @@ model Order {
 
   OrderItem    OrderItem[]
   OrderAddress OrderAddress?
+
+  transactionId String?
 }
 
 // Este modelo referencia a los productos de la pagina del --> order/id
