@@ -1,69 +1,45 @@
 "use client";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 
-import { QuantitySelector } from "@/components";
 import { CartProduct } from "@/interfaces";
 import { useCartStore } from "@/store";
 import { currencyFormat } from "@/utils/currencyFormat";
-import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
 const ProductsInCart = () => {
   const router = useRouter();
-
   const productsInCart = useCartStore((state) => state.cart);
-  const updateProductQuantity = useCartStore(
-    (state) => state.updateProductQuantity
-  );
-  const removeProductFromCart = useCartStore(
-    (state) => state.removeProductFromCart
-  );
-
-  const handleDelete = (product: CartProduct) => {
-    removeProductFromCart(product);
-  };
 
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     if (productsInCart.length === 0) router.push("/empty");
-
     setLoaded(true);
-  }, [productsInCart.length, router]);
+  }, [productsInCart, router]);
 
   if (!loaded) return <ProductListSkeleton productsInCart={productsInCart} />;
 
   return (
     <div>
-      {productsInCart.map((item) => (
-        <div key={`${item.slug}-${item.size}`} className="flex mb-5">
+      {productsInCart.map((product) => (
+        <div key={`${product.slug}-${product.size}`} className="flex mb-5">
           <Image
             priority
-            src={`/products/${item.image}`}
-            alt={`image ${item.title}`}
+            src={`/products/${product.image}`}
+            alt={`image ${product.title}`}
             width={100}
             height={100}
             className="mr-5 size-20 rounded object-cover"
           />
           <div>
-            <Link href={`/product/${item.slug}`} className="hover:underline">
-              {item.size} - {item.title}
-            </Link>
-            <p>{currencyFormat(item.price)}</p>
+            <span>
+              {product.size} - {product.title} - ({product.quantity})
+            </span>
 
-            <QuantitySelector
-              quantity={item.quantity}
-              onQuantityChanged={(quantity) =>
-                updateProductQuantity(item, quantity)
-              }
-            />
-            <button
-              className="underline mt-3 cursor-pointer"
-              onClick={() => handleDelete(item)}
-            >
-              Remove
-            </button>
+            <p className="font-bold">
+              {currencyFormat(product.price * product.quantity)}
+            </p>
           </div>
         </div>
       ))}
