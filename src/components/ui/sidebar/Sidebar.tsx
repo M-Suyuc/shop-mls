@@ -123,14 +123,16 @@ export const Sidebar = ({ session }: Props) => {
             <Link
               href="/"
               className="flex items-center mt-2 p-2 hover:bg-gray-100 rounded transition-all"
+              onClick={closeSideMenu}
             >
               <IoShirtOutline size={30} />
               <span className="ml-3 text-xl">Productos</span>
             </Link>
 
             <Link
-              href="/"
+              href="/admin/orders"
               className="flex items-center mt-2 p-2 hover:bg-gray-100 rounded transition-all"
+              onClick={closeSideMenu}
             >
               <IoTicketOutline size={30} />
               <span className="ml-3 text-xl">Ordenes</span>
@@ -139,6 +141,7 @@ export const Sidebar = ({ session }: Props) => {
             <Link
               href="/"
               className="flex items-center mt-2 p-2 hover:bg-gray-100 rounded transition-all"
+              onClick={closeSideMenu}
             >
               <IoPeopleOutline size={30} />
               <span className="ml-3 text-xl">Usuarios</span>
