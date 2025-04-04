@@ -5,6 +5,8 @@ import { Title } from "@/components";
 import { getOrderById } from "@/actions/order/get-order-by-id";
 import { redirect } from "next/navigation";
 import { currencyFormat } from "@/utils/currencyFormat";
+import PaypalButton from "@/components/paypal/paypalButton";
+import { OrderStatus } from "@/components/orders/ordet-status";
 
 interface Props {
   params: Promise<{
@@ -31,21 +33,8 @@ export default async function OrderByIdPage({ params }: Props) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
           {/* cart Items */}
           <div className="flex flex-col mt-5">
-            <div
-              className={clsx(
-                "flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5",
-                {
-                  "bg-red-500": !order!.isPaid,
-                  "bg-green-700": order!.isPaid,
-                }
-              )}
-            >
-              <IoCardOutline size={30} />
+            <OrderStatus isPaid={order?.isPaid ?? false} />
 
-              <span className="mx-2">
-                {order!.isPaid ? "Pagada" : "Pendiente de pago"}
-              </span>
-            </div>
             {orderItems?.map((item) => (
               <div
                 key={item.product.slug + "-" + item.size}
@@ -112,21 +101,14 @@ export default async function OrderByIdPage({ params }: Props) {
             </div>
 
             <div className="mt-5 mb-2">
-              <div
-                className={clsx(
-                  "flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5",
-                  {
-                    "bg-red-500": !order?.isPaid,
-                    "bg-green-700": order?.isPaid,
-                  }
-                )}
-              >
-                <IoCardOutline size={30} />
-
-                <span className="mx-2">
-                  {order?.isPaid ? "Pagada" : "Pendiente de pago"}
-                </span>
-              </div>
+              {order?.isPaid ? (
+                <OrderStatus isPaid={order?.isPaid ?? false} />
+              ) : (
+                <PaypalButton
+                  amount={order!.total.toString()}
+                  orderId={order!.id}
+                />
+              )}
             </div>
           </div>
         </div>
