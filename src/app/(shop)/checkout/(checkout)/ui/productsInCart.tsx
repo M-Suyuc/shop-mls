@@ -2,23 +2,19 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-import { CartProduct } from "@/interfaces";
 import { useCartStore } from "@/store";
 import { currencyFormat } from "@/utils/currencyFormat";
-import { useRouter } from "next/navigation";
 
 const ProductsInCart = () => {
-  const router = useRouter();
   const productsInCart = useCartStore((state) => state.cart);
 
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    if (productsInCart.length === 0) router.push("/empty");
     setLoaded(true);
-  }, [productsInCart, router]);
+  }, [productsInCart]);
 
-  if (!loaded) return <ProductListSkeleton productsInCart={productsInCart} />;
+  if (!loaded) return <ProductListSkeleton />;
 
   return (
     <div>
@@ -48,10 +44,7 @@ const ProductsInCart = () => {
 };
 export default ProductsInCart;
 
-type Products = {
-  productsInCart: CartProduct[];
-};
-const ProductListSkeleton: React.FC<Products> = ({}) => {
+const ProductListSkeleton = () => {
   return (
     <div className="animate-pulse">
       {[...Array(2)].map((_, index) => (

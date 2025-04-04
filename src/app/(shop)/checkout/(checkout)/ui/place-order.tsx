@@ -17,16 +17,17 @@ const PlaceOrder = () => {
   const [errorMessage, seterrorMessage] = useState("");
 
   const [loaded, setLoaded] = useState(false);
-  // Este loaded se utiliza para no tener prblemas de discrepancian entro lo que genera el servidor y el cliente
-  useEffect(() => {
-    setLoaded(true);
-  }, []);
 
   const address = useAddressStore((state) => state.address);
   const { getSummaryInformation } = useCartStore();
   const { itemsInCart, subTotal, tax, total } = getSummaryInformation();
   const cart = useCartStore((state) => state.cart);
   const clearCart = useCartStore((state) => state.clearCart);
+
+  // Este loaded se utiliza para no tener prblemas de discrepancian entro lo que genera el servidor y el cliente
+  useEffect(() => {
+    setLoaded(true);
+  }, []);
 
   const onPlaceOrder = async () => {
     setIsPlacingOrder(true);
@@ -45,6 +46,7 @@ const PlaceOrder = () => {
       seterrorMessage(res.message);
       return;
     }
+
     clearCart();
     router.replace("/orders/" + res.order!.id);
   };

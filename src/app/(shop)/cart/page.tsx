@@ -4,8 +4,6 @@ import ProductsInCart from "./ui/productsInCart";
 import SummaryProducts from "./ui/summaryProducts";
 
 export default function Home() {
-  // redirect('/empty')
-
   return (
     <div className="flex min-h-screen justify-center items-start px-10 sm:px-0">
       <div className="flex flex-col w-[1000px] ">
