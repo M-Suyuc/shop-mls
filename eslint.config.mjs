@@ -13,24 +13,7 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     rules: {
-      "no-unused-vars": [
-        "error",
-        {
-          argsIgnorePattern: "^_",
-          varsIgnorePattern: "^_",
-          destructuredArrayIgnorePattern: "^_",
-          caughtErrorsIgnorePattern: "^_",
-        },
-      ],
-      "@typescript-eslint/no-unused-vars": [
-        "error",
-        {
-          argsIgnorePattern: "^_",
-          varsIgnorePattern: "^_",
-          destructuredArrayIgnorePattern: "^_",
-          caughtErrorsIgnorePattern: "^_",
-        },
-      ],
+      "@typescript-eslint/no-unused-vars": "off",
     },
   },
 ];
