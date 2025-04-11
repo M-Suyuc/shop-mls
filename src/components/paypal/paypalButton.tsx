@@ -71,7 +71,7 @@ const PaypalButton = ({ amount, orderId }: Props) => {
 
   return (
     <div className="relative z-0">
-      <PayPalButtons createOrder={createOrder} onApprove={onApprove} />;
+      <PayPalButtons createOrder={createOrder} onApprove={onApprove} />
     </div>
   );
 };
