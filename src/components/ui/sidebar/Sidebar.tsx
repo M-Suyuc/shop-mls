@@ -121,7 +121,7 @@ export const Sidebar = ({ session }: Props) => {
         {isAdmin && (
           <>
             <Link
-              href="/"
+              href="/admin/products"
               className="flex items-center mt-2 p-2 hover:bg-gray-100 rounded transition-all"
               onClick={closeSideMenu}
             >
