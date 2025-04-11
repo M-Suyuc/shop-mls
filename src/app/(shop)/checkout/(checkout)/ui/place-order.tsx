@@ -38,17 +38,17 @@ const PlaceOrder = () => {
       size: product.size,
     }));
 
-    const res = await placeOrder(productsToOrder, address);
+    const { ok, message, order } = await placeOrder(productsToOrder, address);
     // console.log("🚀 ~ onPlaceOrder ~ res:", res);
 
-    if (!res.ok) {
+    if (!ok) {
       setIsPlacingOrder(false);
-      seterrorMessage(res.message);
+      seterrorMessage(message ?? "");
       return;
     }
 
     clearCart();
-    router.replace("/orders/" + res.order!.id);
+    router.replace("/orders/" + order!.id);
   };
 
   if (!loaded) {

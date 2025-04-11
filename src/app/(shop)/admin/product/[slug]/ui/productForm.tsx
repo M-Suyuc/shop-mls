@@ -60,7 +60,12 @@ export const ProductForm = ({ product, categories }: Props) => {
   const onSizeChange = (size: string) => {
     // forma 1: usando el new Set()
     const currentSizes = new Set(getValues("sizes") || []);
-    currentSizes.has(size) ? currentSizes.delete(size) : currentSizes.add(size);
+    if (!currentSizes.has(size)) {
+      currentSizes.add(size);
+    } else {
+      currentSizes.delete(size);
+    }
+
     // INFO  Array.from es lo misno de hacer un spredd [...]
     // setValue("sizes", Array.from(currentSizes));
     setValue("sizes", [...currentSizes]);
