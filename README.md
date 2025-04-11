@@ -58,6 +58,10 @@ npm run dev
 #### Comandos utiles a futuro
 
 ```sh
-npx prisma db pull (All tener una DB y quieras pasarte a prisma ORM o crear modelos en base a lo que tengas en la DB)
+npx prisma db pull
+All tener una DB y quieras pasarte a prisma ORM o crear modelos en base a lo que tengas en la DB
+
+deploy to vercel
+npx prisma migrate deploy
 
 ```
