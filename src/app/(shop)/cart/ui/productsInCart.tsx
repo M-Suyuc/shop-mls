@@ -1,6 +1,6 @@
 "use client";
 
-import { QuantitySelector } from "@/components";
+import { ProductImage, QuantitySelector } from "@/components";
 import { CartProduct } from "@/interfaces";
 import { useCartStore } from "@/store";
 import { currencyFormat } from "@/utils/currencyFormat";
@@ -37,9 +37,8 @@ const ProductsInCart = () => {
     <div>
       {productsInCart.map((item) => (
         <div key={`${item.slug}-${item.size}`} className="flex mb-5">
-          <Image
-            priority
-            src={`/products/${item.image}`}
+          <ProductImage
+            src={item.image}
             alt={`image ${item.title}`}
             width={100}
             height={100}
