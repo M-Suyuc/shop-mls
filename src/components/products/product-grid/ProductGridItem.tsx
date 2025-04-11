@@ -1,5 +1,6 @@
 "use client";
 
+import { ProductImage } from "@/components/product/product-image/productImage";
 import { Product } from "@/interfaces";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,15 +19,14 @@ export const ProductGridItem = ({ product }: Props) => {
   return (
     <div className="rounded-md overflow-hidden border border-violet-900/20 fade-in">
       <Link href={`/product/${slug}`}>
-        <Image
-          priority
-          src={`/products/${displaImage}`}
+        <ProductImage
+          src={displaImage}
           alt={title}
           className="w-full object-cover rounded"
           width={500}
           height={500}
-          onMouseEnter={() => setDisplaImage(images[1] ?? images[0])}
-          onMouseLeave={() => setDisplaImage(images[0])}
+          setDisplaImage={setDisplaImage}
+          images={images}
         />
       </Link>
 
