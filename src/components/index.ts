@@ -15,3 +15,5 @@ export * from "./product/slideshow/ProductSlideshow";
 export * from "./ui/footer/Footer";
 
 export * from "./providers/Providers";
+
+export * from "./product/product-image/productImage";
