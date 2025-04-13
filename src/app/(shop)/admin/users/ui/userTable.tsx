@@ -18,19 +18,19 @@ const UserTable = ({ users }: Props) => {
               scope="col"
               className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
             >
-              email
+              Email
             </th>
             <th
               scope="col"
               className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
             >
-              Full name
+              Full Name
             </th>
             <th
               scope="col"
               className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
             >
-              role
+              Role
             </th>
           </tr>
         </thead>

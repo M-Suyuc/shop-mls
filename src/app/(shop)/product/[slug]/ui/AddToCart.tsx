@@ -57,7 +57,7 @@ export const AddToCart = ({ product }: Props) => {
         onClick={addToCart}
         className="bg-black hover:bg-black/80 text-white font-semibold py-3 px-6 rounded-lg transition-all w-fit my-4 "
       >
-        Añadir a la cesta
+        Add to cart
       </button>
     </>
   );

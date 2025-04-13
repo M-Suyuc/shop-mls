@@ -44,25 +44,25 @@ export default async function OrdersPage(props: {
                 scope="col"
                 className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
               >
-                #ID
+                #Id
               </th>
               <th
                 scope="col"
                 className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
               >
-                Nombre completo
+                Full Name
               </th>
               <th
                 scope="col"
                 className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
               >
-                Estado
+                PaymentStatus
               </th>
               <th
                 scope="col"
                 className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
               >
-                Opciones
+                Options
               </th>
             </tr>
           </thead>
@@ -83,12 +83,12 @@ export default async function OrdersPage(props: {
                   {order.isPaid ? (
                     <>
                       <IoCardOutline className="text-green-800" />
-                      <span className="mx-2 text-green-800">Pagada</span>
+                      <span className="mx-2 text-green-800">Paid</span>
                     </>
                   ) : (
                     <>
                       <IoCardOutline className="text-red-800" />
-                      <span className="mx-2 text-red-800">No Pagada</span>
+                      <span className="mx-2 text-red-800">Pending Payment</span>
                     </>
                   )}
                 </td>
@@ -97,7 +97,7 @@ export default async function OrdersPage(props: {
                     href={`/orders/${order.id}`}
                     className="hover:underline"
                   >
-                    Ver orden
+                    View Order
                   </Link>
                 </td>
               </tr>
